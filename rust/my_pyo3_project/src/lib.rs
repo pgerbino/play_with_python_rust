@@ -1,6 +1,9 @@
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyTuple};
 use std::cell::Cell;
+// import polars
+use polars::prelude::*;
+use pyo3_polars::*;
 
 /// A function decorator that keeps track how often it is called.
 ///
@@ -59,8 +62,39 @@ impl PyCounter {
     }
 }
 
+#[pyfunction]
+fn add_two_numbers(a: i64, b: i64) -> i64 {
+    a + b
+}
+
+#[pyfunction]
+#[pyo3 (signature=(**kwds))]
+// This function takes an optional dictionary of keyword arguments and prints each key-value pair.
+fn num_kwds(kwds: Option<&Bound<'_, PyDict>>) -> PyResult<()> {
+    // Check if the `kwds` argument is not `None`.
+    if let Some(kwds) = kwds {
+        // Iterate over each key-value pair in the dictionary.
+        for (key, value) in kwds.iter() {
+            // Print the key and its corresponding value.
+            println!("{}: {}", key, value);
+        }
+    }
+    // Return `Ok(())` to indicate that the function executed successfully.
+    Ok(())
+}
+
+// create a pyfunction that takes a polars DataFrame and returns it
+#[pyfunction]
+fn from_polars(pydf:PyDataFrame) -> PyResult<PyDataFrame>  {
+    // let df = df.extract::<DataFrame>(py)?;
+    Ok(pydf)
+}
+
 #[pymodule]
 pub fn my_pyo3_project(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<PyCounter>()?;
+    module.add_function(wrap_pyfunction!(add_two_numbers, module)?)?;
+    module.add_function(wrap_pyfunction!(num_kwds, module)?)?;
+    module.add_function(wrap_pyfunction!(from_polars, module)?)?;
     Ok(())
 }
