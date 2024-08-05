@@ -60,7 +60,7 @@ impl PyCounter {
 }
 
 #[pymodule]
-pub fn decorator(module: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn my_pyo3_project(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<PyCounter>()?;
     Ok(())
 }
