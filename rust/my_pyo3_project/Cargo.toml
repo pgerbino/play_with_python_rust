@@ -1,0 +1,12 @@
+[package]
+authors = ["piero gerbino <piero_gerbino@hotmail.com>"]
+name = "my_pyo3_project"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "decorator"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22.2", features = ["extension-module"] }
