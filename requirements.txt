@@ -1,0 +1,2 @@
+maturin==1.7.0
+polars==1.4.1
