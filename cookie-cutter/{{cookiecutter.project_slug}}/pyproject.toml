@@ -1,0 +1,9 @@
+[build-system]
+requires = ["maturin>=0.13,<0.14"]
+build-backend = "maturin"
+
+[project]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.description }}"
+authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.email }}>"]

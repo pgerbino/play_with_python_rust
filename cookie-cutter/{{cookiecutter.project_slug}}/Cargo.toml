@@ -1,0 +1,11 @@
+[package]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.email }}>"]
+edition = "2021"
+
+[dependencies]
+pyo3 = { version = "0.18.0", features = ["extension-module"] }
+
+[lib]
+crate-type = ["cdylib"]

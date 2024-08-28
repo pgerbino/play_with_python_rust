@@ -1,0 +1,9 @@
+{
+    "project_name": "My Rust PyO3 Project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+    "author_name": "Piero Gerbino",
+    "email": "piero_gerbino@some_email.com",
+    "version": "0.1.0",
+    "description": "A Rust project using PyO3 to create Python extensions"
+  }
+  
