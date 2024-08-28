@@ -5,8 +5,9 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "decorator"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.22.2", features = ["extension-module"] }
+pyo3 = { version = "0.21.0", features = ["extension-module"] }
+polars = {version = "0.21", features =["lazy", "is_in"]}
+pyo3-polars = "0.15.0"

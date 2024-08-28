@@ -1,5 +1,10 @@
+// we use mod keyword because we want to create a module
+// a module is a collection of items: functions, structs, traits, impl blocks, and even other modules
+mod more_polars;
+
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyTuple};
+use pyo3_polars::PyDataFrame;
 use std::cell::Cell;
 
 /// A function decorator that keeps track how often it is called.
@@ -57,6 +62,19 @@ impl PyCounter {
         // the function before returning it
         Ok(ret)
     }
+
+    // this method needs to be part of the pyo3 module
+    // it should be a gil reference not pure rust code
+    // this is because we are being called from Python code
+    // pub fn add(&self, py: Python, df_a: PyDataFrame, df_b: PyDataFrame) -> PyDataFrame {
+    //     // convert the PyDataFrame to a DataFrame
+    //     let df_a = df_a.as_ref();
+    //     let df_b = df_b.as_ref();
+    //     let mask = column("Factor").eq("A");
+    //     let filtered_df_b = df_a.filter(column("name").is_in(df_b.column("name").unwrap()));
+    //     pyo3_polars::PyDataFrame(filtered_df_b)
+    // }
+    
 }
 
 #[pymodule]
